@@ -1,0 +1,60 @@
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* un poco negro */
+  backdrop-filter: blur(5px); /* efecto blur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* arriba de todo */
+}
+
+/* Modal */
+.modal-content {
+  background: #1e1e1e; /* fondo del formulario */
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px; /* tamaño máximo */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  min-height: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*AUTH MODAL*/
+.active{
+  border: 1px solid #1f6feb;
+
+}
+.inactive{
+  background-color: #1e1e1e;
+  border: 1px solid #1f6feb;
+}
+.close-btn{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.auth-tabs{
+  display: flex;
+  flex-direction: row; 
+  gap: 20px;
+}
+
+/* LOGIN & REGISTER*/
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+.auth-form input{
+  width: 100%;
+  margin-bottom: 20px;
+}

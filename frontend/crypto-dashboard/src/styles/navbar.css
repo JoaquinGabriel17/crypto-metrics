@@ -1,0 +1,41 @@
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  position: sticky;
+  top: 0;
+  flex-direction: row;
+  z-index: 900;
+}
+
+.logo {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    z-index: 900;
+}
+
+.nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
+.nav-btn-user{
+  background-color: transparent;
+  border: 1px solid #3a7ff2;
+}
