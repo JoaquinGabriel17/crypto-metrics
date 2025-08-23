@@ -1,38 +1,59 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/dashboard.css';
+import axios from 'axios';
+const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
+
 
 export default function Dashboard() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
-    // Datos de configuración ficticios
     const [email, setEmail] = useState('');
-    const [notifications, setNotifications] = useState(true);
-    const [theme, setTheme] = useState('light');
+    const [name, setName] = useState('');
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
+        const storedUser = sessionStorage.getItem('user');
         if (storedUser) {
             const parsedUser = JSON.parse(storedUser);
             setUser(parsedUser);
             setEmail(parsedUser.email || '');
+            setName(parsedUser.name || '');
+
         } else {
             // Si no hay usuario logueado, redirigir a login
-            navigate('/login');
+            navigate('/');
         }
     }, [navigate]);
 
-    const handleSave = () => {
+    async function handleSave(){
         // Guardamos los cambios en localStorage (simulación)
-        const updatedUser = { ...user, email, notifications, theme };
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUser(updatedUser);
-        alert('Configuración guardada ✅');
+        let user = JSON.parse(sessionStorage.getItem("user"));
+        let token = sessionStorage.getItem("token")
+        console.log(token)
+        if(email.length) user.email = email;
+        else if(name.length) user.name = name
+        else{
+            alert('No se detectaron cambios para guardar')
+            return
+        }
+        try {
+            const response = await axios.put(`${ApiURL}/auth/update-user`,
+            user,
+            {
+                headers: {
+                    Authorization: `Bearer ${token.trim()}`
+                }
+            })
+            alert('Configuración guardada ✅');
+            sessionStorage.setItem("user", JSON.stringify(user));
+        } catch (error) {
+            alert('error al guardar los cambios',error)
+        }
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         navigate('/');
     }
 
@@ -51,21 +72,13 @@ export default function Dashboard() {
                     />
                 </label>
 
-                <label>
-                    Notificaciones:
+                 <label>
+                    Nombre de usuario:
                     <input 
-                        type="checkbox" 
-                        checked={notifications} 
-                        onChange={(e) => setNotifications(e.target.checked)} 
+                        type="text" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
                     />
-                </label>
-
-                <label>
-                    Tema:
-                    <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-                        <option value="light">Claro</option>
-                        <option value="dark">Oscuro</option>
-                    </select>
                 </label>
 
                 <button onClick={handleSave}>Guardar cambios</button>

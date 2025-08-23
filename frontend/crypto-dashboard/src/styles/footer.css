@@ -5,4 +5,5 @@
   padding: 1rem;
   background: var(--bg-card);
   color: #aaa;
+  bottom: 0;
 }

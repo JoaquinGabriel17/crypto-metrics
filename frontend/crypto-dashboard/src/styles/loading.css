@@ -1,0 +1,118 @@
+/* Reset suave del contenedor */
+.ld-root {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0d1117; /* fallback light */
+}
+
+/* Overlay a pantalla completa */
+.ld-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, #0d1117 10%, transparent);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Texto */
+.ld-text {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* =========================
+   Spinner
+   ========================= */
+.ld-spinner {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #cfd3d8 transparent #cfd3d8 #cfd3d8; /* un segmento transparente para el “giro” */
+  border-radius: 9999px;
+  animation: ld-rotate 1s linear infinite;
+}
+
+@keyframes ld-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   Dots
+   ========================= */
+.ld-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.ld-dots > span {
+  width: 1em;
+  height: 1em;
+  border-radius: 9999px;
+  background: #00b894; /* acento */
+  opacity: 0.25;
+  animation: ld-bounce 1s ease-in-out infinite;
+}
+
+.ld-dots > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.ld-dots > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes ld-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.25; }
+  40% { transform: translateY(-35%); opacity: 1; }
+}
+
+/* =========================
+   Bar
+   ========================= */
+.ld-bar {
+  --ld-bar-h: 6px;
+  position: relative;
+  width: min(56vw, 320px);
+  height: var(--ld-bar-h);
+  border-radius: 9999px;
+  background: #e8eaee;
+  overflow: hidden;
+}
+.ld-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent 0%, #00b894 40%, #00b894 60%, transparent 100%);
+  animation: ld-sweep 1.2s ease-in-out infinite;
+}
+
+@keyframes ld-sweep {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(-10%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Accesibilidad: respetar usuarios con motion reducido */
+@media (prefers-reduced-motion: reduce) {
+  .ld-spinner,
+  .ld-dots > span,
+  .ld-bar::before {
+    animation-duration: 2.5s;
+  }
+}
+
+/* Dark mode amable (si el sitio lo usa) */
+@media (prefers-color-scheme: dark) {
+  .ld-root { color: #e6edf3; }
+  .ld-overlay { background: color-mix(in srgb, #0d1117 40%, transparent); }
+  .ld-spinner { border-color: #3b3f45 transparent #3b3f45 #3b3f45; }
+  .ld-bar { background: #2a2f36; }
+  .ld-dots > span { background: #00b894; }
+}

@@ -46,3 +46,34 @@ export async function deleteUser(req, res, next) {
     next(e);
   }
 }
+
+
+// Controlador para actualizar email y/o nombre
+export async function updateUser(req, res, next) {
+  try {
+    const { email, name, id } = req.body;
+
+    // Armamos un objeto con solo los campos que vienen
+    const updates = {};
+    if (email) updates.email = email;
+    if (name) updates.name = name;
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({ message: "No se enviaron campos para actualizar" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(id, updates, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    return res.json({
+      id: updatedUser._id,
+      email: updatedUser.email,
+      name: updatedUser.name,
+    });
+  } catch (e) {
+    next(e);
+  }
+}

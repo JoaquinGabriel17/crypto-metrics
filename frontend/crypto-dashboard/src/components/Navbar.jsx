@@ -4,32 +4,37 @@ import AuthModal from "./AuthModal";
 import "../styles/navbar.css";
 
 export default function Navbar() {
+  
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Recuperamos el usuario desde localStorage
-  const storedUser = localStorage.getItem("user");
-  const [ user, setUser ] = useState(storedUser ? JSON.parse(storedUser) : null)
+  
 
 
-  // Función que se pasa al AuthModal
+// verificar si hay un usuario logueado
+  let storedUser = sessionStorage.getItem("user");
+  let parsedUser = null;
+  if (storedUser && storedUser !== "undefined") {
+    parsedUser = JSON.parse(storedUser);
+  }
+  const [user, setUser] = useState(parsedUser);
+
+
+  // funciones de login y logout
   const handleAuthSuccess = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    if(userData) setUser(userData);
     setIsModalOpen(false);
   };
-
   const handleLogout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
   };
 
   return (
     <header className="header">
-      <h1 className="logo">CryptoMetrics</h1>
+      <h1 onClick={() => navigate('/')} className="logo">CryptoMetrics</h1>
       <nav className="nav">
         <button className="nav-btn">Criptomonedas</button>
-        <button className="nav-btn">Precios</button>
+        <button onClick={() => navigate('/highlights')} className="nav-btn">Destacado</button>
         <button className="nav-btn">Sobre nosotros</button>
 
         {user ? (
@@ -37,7 +42,7 @@ export default function Navbar() {
             className="nav-btn user-btn"
             onClick={() => navigate("/dashboard")}
           >
-            {user.username}
+            Cuenta
           </button>
         ) : (
           <button

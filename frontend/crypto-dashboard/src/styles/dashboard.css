@@ -1,6 +1,7 @@
 .settings{
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .dashboard{
@@ -8,4 +9,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.dashboard button{
 }

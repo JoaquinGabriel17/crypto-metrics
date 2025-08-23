@@ -1,10 +1,16 @@
 import { Router } from 'express';
 import { login, register, deleteUser } from '../controllers/auth.controller.js';
-import { verifyJWT, requireRole } from '../middleware/auth.js';
+import { verifyJWT } from '../middleware/auth.js';
+import { sendEmail } from '../controllers/emailController.js';
+import { updateUser } from "../controllers/auth.controller.js";
+
 
 const router = Router();
 router.post('/register', register);
 router.post('/login', login);
-router.delete('/delete/:id', verifyJWT, requireRole, deleteUser);
+router.delete('/delete/:id',verifyJWT, deleteUser);
+router.post('/send-email', sendEmail);
+router.put("/update-user",verifyJWT, updateUser);
+
 
 export default router;

@@ -6,28 +6,29 @@ import { useNavigate } from "react-router-dom";
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const ApiURL = import.meta.env.VITE_BACKEND_API_URL
+  const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
   const navigate = useNavigate()
 
+  //función al hacer submit
   async function handleSubmit (e) {
     e.preventDefault();
-    // Simulamos login
+    // intentar login
     try {
       const response = await axios.post(`${ApiURL}/auth/login`,{
         email: email,
         password: password
       });
-      console.log(response)
       //si la respuesta es 200 se guarda la data del user en localstorage
       if(response.status == 200){
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-
-        if (onLogin) onLogin();
-        navigate('/')
+        console.log(response.data.user)
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        sessionStorage.setItem("token",response.data.token);
+        onLogin(response.data.user);
       }
+      else alert('Error al iniciar sesión')
     } catch (error) {
-      console.log("HOLA", error)
+      console.log(error)
+      alert('Error al iniciar sesión', error)
     }
   };
 
