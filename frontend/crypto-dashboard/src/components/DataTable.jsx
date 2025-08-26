@@ -19,7 +19,15 @@ export default function DataTable() {
     setloading(true)
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${ApiURL}/crypto/market-data`);
+        const res = await axios.get(`${ApiURL}/crypto/market-data`, {
+  params: {
+    endpoint: '/coins/markets',
+    site: 'landing',
+      vs_currency: 'usd',
+      order: "market_cap_desc",
+      per_page: 250,
+      price_change_percentage:"1h,24h,7d"
+  }})
         setCryptos(res.data);
         setloading(false)
 
@@ -79,9 +87,11 @@ return (
             <tr key={coin.id}>
             <td>{indexOfFirstItem + index + 1}</td>
               <td className="coin-cell">
-                <img src={coin.image} alt={coin.name} className="coin-icon" />
-                <span className="coin-name">{coin.name}</span>
-                <span className="coin-symbol">{coin.symbol.toUpperCase()}</span>
+                <div className="coin-cell-contain">
+                  <img src={coin.image} alt={coin.name} className="coin-icon" />
+                  <span className="coin-name">{coin.name}</span>
+                  <span className="coin-symbol">{coin.symbol.toUpperCase()}</span>
+                </div>
               </td>
               <td>${coin.current_price.toLocaleString()}</td>
               <td className={coin.price_change_percentage_1h_in_currency >= 0 ? "positive" : "negative"}>

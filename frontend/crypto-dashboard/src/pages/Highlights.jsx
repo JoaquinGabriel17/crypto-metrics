@@ -1,41 +1,34 @@
 import HighlightSection from '../components/HighlightSection.jsx'
-
+import '../styles/highlights.css'
 
 const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
 
 
 export default function Highlights() {
-  const commonParams = { vs_currency: 'usd', order: 'market_cap_desc', per_page: 250 };
+
   return (
     <div className="highlights-container">
+      
+     
+      
       <HighlightSection
-        title="Top 10 por Market Cap"
+        title="Cap. de mercado mas alto"
         endpoint="/coins/markets"
-        params={{ ...commonParams, per_page: 10 }}
+        site="top-market-cap"
+        params={{ vs_currency: 'usd', order: 'market_cap_desc', per_page: 10 , price_change_percentage: "1h,24h,7d" }}
       />
+      
       <HighlightSection
-        title="10 Trending en CoinGecko"
-        endpoint="/coins/top_gainers_losers"
-        params={{ /* explicar más abajo que requiere plan pago */ }}
+        title="Volumen mas alto"
+        endpoint="/coins/markets"
+        site="top-volume"
+        params={{vs_currency: "usd",order: "volume_desc", per_page: 10, page: 1}}
+        
+        
       />
-      <HighlightSection
-        title="Top 10 por Tipo de Categoría"
-        endpoint="/coins/list/new"
-        params={{}}
-      />
-      <HighlightSection
-        title="Top 10 por Volumen 24 h"
-        endpoint="/search/trending"
-        params={{}}
-      />
-      <HighlightSection
-        title="Top 10 con Volatilidad Alta (Mayor % cambio 24h)"
-      />
-      <HighlightSection
-        title="Top 10 Stablecoins por Market Cap"
-      />
-      <HighlightSection
-        title="Top 10 Criptos por Dominancia Global"
+      <HighlightSection 
+        title="Monedas mas populares"
+        site="trending-coins"
       />
     </div>
   );

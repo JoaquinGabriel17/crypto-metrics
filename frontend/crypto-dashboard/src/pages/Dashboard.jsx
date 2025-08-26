@@ -59,7 +59,7 @@ export default function Dashboard() {
 
     return (
         <div className="dashboard">
-            <h1>Bienvenido, {user?.username}</h1>
+            <h1>Bienvenido, {user?.name}</h1>
             
             <section className="settings">
                 <h2>Configuración de la cuenta</h2>

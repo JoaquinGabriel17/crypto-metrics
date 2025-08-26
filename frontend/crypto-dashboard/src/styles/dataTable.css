@@ -40,7 +40,7 @@
   background: #1c2128;
 }
 
-.coin-cell {
+.coin-cell-contain{
   display: flex;
   align-items: center;
   gap: 0.5rem;
