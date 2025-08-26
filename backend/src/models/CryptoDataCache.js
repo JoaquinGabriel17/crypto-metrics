@@ -9,6 +9,10 @@ const CryptoCacheSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  site:{
+    type: String,
+    required: true,
+  },
 });
 
 // Usamos colección "cryptoCache", siempre un solo doc
