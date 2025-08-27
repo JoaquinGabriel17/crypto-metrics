@@ -17,14 +17,24 @@
 }
 
 .table-container tr{
-    height: 30px;
+    height: 40px;
 }
 
 .tbody-highlights td{
-   height: 3.5rem;
+   height: 4.5rem;
 }
 .crypto-table-highlights{
-     width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border: 1px solid #2d333b;
+  background: var(--color-bg-light);
+  border-radius: 8px;
+  overflow: hidden;
+  
+}
+.crypto-table-categories{
+  width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
   background: var(--color-bg-light);
@@ -51,4 +61,23 @@
 
 .crypto-table-highlights tbody tr:hover {
   background: #1c2128;
+}
+.category-table-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2d333b;
+  border-radius: 8px;
+}
+
+.categories-page{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
 }

@@ -29,6 +29,7 @@ export default function Highlights() {
       <HighlightSection 
         title="Monedas mas populares"
         site="trending-coins"
+        endpoint="/search/trending"
       />
     </div>
   );

@@ -10,24 +10,20 @@ export default function HighlightSection({ title, endpoint, params, site }) {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   
-  console.log(params)
  
   useEffect(() => {
     setLoading(true)
     const fetch = async () => {
       try {
         let res = null
-        if(site === 'trending-coins') {
-          res = await axios.get(`${ApiURL}/crypto/trending-coins`);
-        }
-        else {
+        
           res = await axios.get(`${ApiURL}/crypto/market-data`, {
             params: {
               endpoint: endpoint,
               site,
               ...params
             }
-      });}
+      });
 
         setCoins(res.data);
         setLoading(false)

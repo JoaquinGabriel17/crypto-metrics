@@ -76,7 +76,7 @@ return (
             <th>1h</th>
             <th>24h</th>
             <th>7d</th>
-            <th>24h Volume</th>
+            <th>Volume</th>
             <th>Market Cap</th>
             <th></th>
           </tr>

@@ -34,8 +34,7 @@ export default function Navbar() {
       <h1 onClick={() => navigate('/')} className="logo">CryptoMetrics</h1>
       <nav className="nav">
         <button onClick={() => navigate('/highlights')} className="nav-btn">Monedas destacadas</button>
-        <button className="nav-btn">Categorías</button>
-        <button className="nav-btn">Sobre nosotros</button>
+        <button onClick={() => navigate('/categories')} className="nav-btn">Categorías</button>
         
 
 
