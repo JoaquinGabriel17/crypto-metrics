@@ -12,6 +12,7 @@ const CACHE_DURATION_MINUTES = 60;
 export const getMarketData = async (site, endpoint, params={}) => {
   if(!endpoint) return "ERROR: Debe enviar un endpoint por parámetro"
   if(!site) return "ERROR: Debe enviar un site por parámetro"
+  console.log(params)
   
   let data = []
 
@@ -38,7 +39,7 @@ export const getMarketData = async (site, endpoint, params={}) => {
 
     // La estructura de la información devuelta por el endpoint /search/trending difiere
     // Se realiza un paso mas antes de devolver la información
-    if(site == 'trending'){
+    if(site == 'trending-coins'){
     response.data.coins.slice(0,10).map((coin, index) => {
       data.push({
         image: coin.item.thumb,
@@ -52,15 +53,15 @@ export const getMarketData = async (site, endpoint, params={}) => {
 
     // Si la consulta es al mismo endpoint /search/trending pero se necesita obtener las categorías
     else if(site == 'categories-trending'){
-      response.data.categories.map((category) => {
+      response.data.categories.slice(0,10).map((category) => {
         data.push({
           name: category.name,
           market_cap_1h_change: category.market_cap_1h_change,
           coins_count: category.coins_count,
           market_cap: category.data.market_cap,
           volume: category.data.total_volume,
-          market_cap_change_percentage_24h: category.data.market_cap_change_percentage_24h.usd,
-          image: category.sparkline,
+          market_cap_change_24h: category.data.market_cap_change_percentage_24h.usd,
+          sparkline: category.sparkline,
         })
       })
     }
