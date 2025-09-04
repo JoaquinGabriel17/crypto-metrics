@@ -78,7 +78,7 @@ return (
             <th>7d</th>
             <th>Volume</th>
             <th>Market Cap</th>
-            <th></th>
+           
           </tr>
         </thead>
         <tbody className={loading ? "tbody-loading" : ""}>
@@ -105,9 +105,7 @@ return (
               </td>
               <td>${coin.total_volume.toLocaleString()}</td>
               <td>${coin.market_cap.toLocaleString()}</td>
-              <td>
-                <button className="buy-btn">Buy</button>
-              </td>
+              
             </tr>
           ))}
         </tbody>

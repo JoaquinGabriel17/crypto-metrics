@@ -5,8 +5,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Foooter";
 import { useState, useEffect } from "react";
 import DataTable from "../components/DataTable";
-import CryptoTable from "../components/RealTimeTable";
-import MiniTickerTable from "../components/MiniTickerTable";
 
 export default function LandingPage() {
 
@@ -21,9 +19,8 @@ export default function LandingPage() {
 
   return (
     <div className="landing">
-      <div>
-        <CryptoTable/>
-        <MiniTickerTable/>
+      <div className="real-time-tables">
+        
       </div>
       <div className="crypto-data-container">
         <h1>Crypto Prices</h1>
