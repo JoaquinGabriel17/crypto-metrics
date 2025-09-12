@@ -11,6 +11,8 @@ import Navbar from './components/Navbar.jsx';
 import Footer from './components/Foooter.jsx';
 import Highlights from './pages/Highlights.jsx';
 import Categories from './pages/Categories.jsx';
+import Exchanges from './pages/Exchanges.jsx';
+import Nfts from './pages/Nfts.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -21,6 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/highlights' element={<Highlights/>} />
         <Route path='/categories' element={<Categories/>}/> 
+        <Route path='/exchanges' element={<Exchanges/>}/>
+        <Route path='*' element={<h1>404 Not Found</h1>} />
+        <Route path='/ntfs' element={<Nfts/>} />
       </Routes>
     </Provider>
     <Footer></Footer>

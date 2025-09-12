@@ -7,7 +7,7 @@ export default function Navbar() {
   
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
 // verificar si hay un usuario logueado
@@ -32,12 +32,14 @@ export default function Navbar() {
   return (
     <header className="header">
       <h1 onClick={() => navigate('/')} className="logo">CryptoMetrics</h1>
-      <nav className="nav">
+      {/* Menú normal */}
+      
+      <nav className={`nav ${isMenuOpen ? "open" : ""}`}>  
         <button onClick={() => navigate('/highlights')} className="nav-btn">Monedas destacadas</button>
+        <button onClick={() => navigate('/exchanges')} className="nav-btn">Intercambios</button>
         <button onClick={() => navigate('/categories')} className="nav-btn">Categorías</button>
-        
-
-
+        <button onClick={() => navigate('/ntfs')} className="nav-btn">NTFs</button>
+        {/* Si un usuario está logueado mostrar no mostrar botón de login */}
         {user ? (
           <button
             className="nav-btn user-btn"
@@ -54,6 +56,14 @@ export default function Navbar() {
           </button>
         )}
       </nav>
+
+      {/* Botón tres puntos solo en pantallas chicas */}
+      <button
+        className="menu-toggle"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        ⋮
+      </button>
 
       {/* Modal de login */}
       <AuthModal isOpen={isModalOpen} 

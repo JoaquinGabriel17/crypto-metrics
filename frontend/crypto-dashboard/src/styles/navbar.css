@@ -16,27 +16,51 @@
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
+  margin-right: 10px;
 }
 
-.nav{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 20px;
-    z-index: 900;
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  z-index: 900;
 }
 
-.nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: var(--text);
-  transition: color 0.3s ease;
-}
-
-.nav a:hover {
-  color: var(--primary);
-}
-
-.nav-btn-user{
+.nav-btn-user {
   background-color: transparent;
   border: 1px solid #3a7ff2;
+}
+
+/* Botón menú (tres puntos) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav {
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    flex-direction: column;
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+    display: none; /* oculto por defecto */
+    border: 1px solid #3a7ff2;
+  }
+
+  .nav.open {
+    display: flex; /* mostrar si el menú está abierto */
+  }
+
+  .menu-toggle {
+    display: block; /* mostrar los tres puntos */
+  }
 }

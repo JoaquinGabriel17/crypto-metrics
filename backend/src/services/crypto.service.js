@@ -65,6 +65,20 @@ export const getMarketData = async (site, endpoint, params={}) => {
         })
       })
     }
+    // Si la consulta es al mismo endpoint /search/trending pero se necesita obtener los NTFS
+    else if(site == 'nfts-trending'){
+      response.data.nfts.map((nft) => {
+        data.push({
+          name: nft.name,
+          floor_price_24h_percentage_change: nft.floor_price_24h_percentage_change,
+          symbol: nft.symbol,
+          image: nft.thumb,
+          floor_price: nft.data.floor_price,
+          h24_volume: nft.data.h24_volume,
+          sparkline: nft.data.sparkline,
+        })
+      })
+    }
     else data = response.data;
 
     // 3. Guardar/actualizar en Mongo

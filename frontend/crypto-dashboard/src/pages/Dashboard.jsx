@@ -83,6 +83,7 @@ export default function Dashboard() {
 
                 <button onClick={handleSave}>Guardar cambios</button>
                 <button onClick={handleLogout} className="logout-btn">Cerrar sesión</button>
+                
             </section>
         </div>
     )
