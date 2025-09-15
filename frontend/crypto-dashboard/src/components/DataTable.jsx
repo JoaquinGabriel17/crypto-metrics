@@ -96,16 +96,16 @@ export default function DataTable() {
 
 
   //Función para agregar o quitar de favoritos
-  async function toggleFavorite (symbol) {
+  async function toggleFavorite (id) {
     try {
       console.log("Toggle favorite clicked");
     
       // Verificar si ya está en favoritos
-    if(favorites.includes(symbol.toUpperCase())){
+    if(favorites.includes(id.toLowerCase())){
       console.log("Removing from favorites")
       const removeResponse = await axios.put(`${ApiURL}/auth/favorites`, {
         id: currentUser.id,
-        favorites: favorites.filter(fav => fav !== symbol.toUpperCase())
+        favorites: favorites.filter(fav => fav !== id.toLowerCase())
       })
       setFavorites(removeResponse.data.favorites);
       console.log("Removed")
@@ -114,7 +114,7 @@ export default function DataTable() {
       console.log("Adding to favorites")
       const addResponse = await axios.put(`${ApiURL}/auth/favorites`, {
         id: currentUser.id,
-        favorites: [...favorites, symbol.toUpperCase()]
+        favorites: [...favorites, id.toLowerCase()]
       })
       setFavorites(addResponse.data.favorites);
       console.log("Added")
@@ -146,8 +146,8 @@ return (
           currentItems.map((coin, index) => (
             <tr key={coin.id}>
               {currentUser &&<td>
-                <button onClick={() => toggleFavorite(coin.symbol.toUpperCase())} className="favorite-button">
-                  {favorites && favorites.includes(coin.symbol.toUpperCase()) ? "⭐" : "☆"}
+                <button onClick={() => toggleFavorite(coin.id.toLowerCase())} className="favorite-button">
+                  {favorites && favorites.includes(coin.id.toLowerCase()) ? "⭐" : "☆"}
                 </button>
               </td>}
               <td>{indexOfFirstItem + index + 1}</td>

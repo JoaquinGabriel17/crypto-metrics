@@ -24,7 +24,7 @@ export default function LandingPage() {
       </div>
       <div className="crypto-data-container">
         <h1>Precios de criptomonedas por capital de mercado</h1>
-        <DataTable data={coins} />
+        <DataTable  data={coins} />
       </div>
     </div>
   );

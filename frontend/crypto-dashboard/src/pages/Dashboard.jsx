@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/dashboard.css';
 import axios from 'axios';
+import HighlightSection from '../components/HighlightSection';
 const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
 
 
@@ -11,6 +12,9 @@ export default function Dashboard() {
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
+    const [favorites, setFavorites] = useState(null)
+    const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null)
+    
 
     useEffect(() => {
         const storedUser = sessionStorage.getItem('user');
@@ -19,12 +23,30 @@ export default function Dashboard() {
             setUser(parsedUser);
             setEmail(parsedUser.email || '');
             setName(parsedUser.name || '');
-
+            setCurrentUser(parsedUser)
         } else {
             // Si no hay usuario logueado, redirigir a login
             navigate('/');
         }
-    }, [navigate]);
+    }, []);
+
+    //Obtener favoritos
+    useEffect(() => {
+ 
+  const fetchFavorites = async () => {
+    try {
+        
+      const favoritesResponse = await axios.get(`${ApiURL}/auth/favorites`, {
+        params: { id: currentUser.id }
+      });
+      setFavorites(favoritesResponse.data.favorites);
+      console.log(favorites.join(','))
+    } catch (err) {
+      console.error("Error al obtener favoritos", err);
+    }
+  };
+  fetchFavorites();
+}, []);
 
     async function handleSave(){
         // Guardamos los cambios en localStorage (simulación)
@@ -54,13 +76,15 @@ export default function Dashboard() {
 
     const handleLogout = () => {
         sessionStorage.removeItem('user');
+        window.location.reload();
+
         navigate('/');
     }
 
     return (
         <div className="dashboard">
-            <h1>Bienvenido, {user?.name}</h1>
             
+            <div className='data-container'>
             <section className="settings">
                 <h2>Configuración de la cuenta</h2>
                 <label>
@@ -80,11 +104,25 @@ export default function Dashboard() {
                         onChange={(e) => setName(e.target.value)} 
                     />
                 </label>
-
+                 </section>
+                <section className='favorites'>
+                
+                {favorites ? 
+                <HighlightSection 
+                    title='Monedas favoritas'
+                    endpoint={`/coins/markets`}
+                    params={{vs_currency:'usd', ids: favorites.join(',')}}
+                    site='favorites-dashboard'
+                />
+                : <p>No hay favoritos en la cuenta</p>
+                }
+                </section>
+                </div>
+                <div className='button-container'>
                 <button onClick={handleSave}>Guardar cambios</button>
                 <button onClick={handleLogout} className="logout-btn">Cerrar sesión</button>
-                
-            </section>
+                </div>
+           
         </div>
     )
 }

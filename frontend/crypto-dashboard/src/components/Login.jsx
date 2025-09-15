@@ -24,6 +24,7 @@ export default function Login({ onLogin }) {
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
         sessionStorage.setItem("token",response.data.token);
         onLogin(response.data.user);
+        window.location.reload();
       }
       else alert('Error al iniciar sesión')
     } catch (error) {
