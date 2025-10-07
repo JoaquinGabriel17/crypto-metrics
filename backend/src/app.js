@@ -5,8 +5,6 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
 import dataRoutes from './routes/data.routes.js';
-import filtersRoutes from './routes/filters.routes.js';
-import cryptoRoutes from "./routes/crypto.routes.js"; // 👈 importar
 import { notFound, errorHandler } from './middleware/error.js';
 
 dotenv.config();
@@ -22,8 +20,6 @@ app.get('/', (_, res) => res.json({ ok: true, service: 'crypto-dashboard-backend
 
 app.use('/api/auth', authRoutes);
 app.use('/api/data', dataRoutes);
-app.use('/api/filters', filtersRoutes);
-app.use("/api/crypto", cryptoRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

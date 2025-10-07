@@ -17,7 +17,7 @@ export default function HighlightSection({ title, endpoint, params, site }) {
       try {
         let res = null
         
-          res = await axios.get(`${ApiURL}/crypto/market-data`, {
+          res = await axios.get(`${ApiURL}/data/market-data`, {
             params: {
               endpoint: endpoint,
               site,

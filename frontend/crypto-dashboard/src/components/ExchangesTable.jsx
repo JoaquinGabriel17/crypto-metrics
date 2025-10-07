@@ -19,7 +19,7 @@ const ExchangesTable = () => {
     setLoading(true)
     const fetchExchanges = async () => {
       try {
-        const res = await axios.get(`${ApiURL}/crypto/market-data`, {
+        const res = await axios.get(`${ApiURL}/data/market-data`, {
             params: {
               endpoint: '/exchanges',
               site: 'exchanges'

@@ -22,7 +22,7 @@ export default function Register({onRegister}) {
 
     //Validaciones de todos los campos con las funciones importadas de validations.js
     if (!validateEmail(form.email)) newErrors.email = "Email inválido";
-    if (!validatePassword(form.password)) newErrors.password = "La contraseña debe tener al menos 6 caracteres, 1 letra y 1 número";
+    /*if (!validatePassword(form.password)) newErrors.password = "La contraseña debe tener al menos 6 caracteres, 1 letra y 1 número";*/
     if (form.password !== form.confirm) newErrors.confirm = "Las contraseñas no coinciden";
     if (!validateName(form.name)) newErrors.name = "El nombre debe tener entre 3 y 20 caracteres y solo letras/números/_";
 

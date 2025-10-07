@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/Landing.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Foooter";
 import { useState, useEffect } from "react";
 import DataTable from "../components/DataTable";
 

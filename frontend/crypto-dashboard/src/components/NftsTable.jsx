@@ -17,7 +17,7 @@ const NftsTable = () => {
     setLoading(true)
     const fetchNfts = async () => {
       try {
-        const res = await axios.get(`${ApiURL}/crypto/market-data`, {
+        const res = await axios.get(`${ApiURL}/data/market-data`, {
             params: {
               endpoint: '/search/trending',
               site: 'nfts-trending'

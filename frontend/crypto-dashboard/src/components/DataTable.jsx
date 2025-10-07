@@ -32,7 +32,7 @@ export default function DataTable() {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${ApiURL}/crypto/market-data`, {
+        const res = await axios.get(`${ApiURL}/data/market-data`, {
   params: {
     endpoint: '/coins/markets',
     site: 'landing',
@@ -58,7 +58,7 @@ export default function DataTable() {
   if (!currentUser) return;
   const fetchFavorites = async () => {
     try {
-      const favoritesResponse = await axios.get(`${ApiURL}/auth/favorites`, {
+      const favoritesResponse = await axios.get(`${ApiURL}/data/favorites`, {
         params: { id: currentUser.id }
       });
       setFavorites(favoritesResponse.data.favorites || []);
@@ -103,7 +103,7 @@ export default function DataTable() {
       // Verificar si ya está en favoritos
     if(favorites.includes(id.toLowerCase())){
       console.log("Removing from favorites")
-      const removeResponse = await axios.put(`${ApiURL}/auth/favorites`, {
+      const removeResponse = await axios.put(`${ApiURL}/data/favorites`, {
         id: currentUser.id,
         favorites: favorites.filter(fav => fav !== id.toLowerCase())
       })
@@ -112,7 +112,7 @@ export default function DataTable() {
     }
     else{
       console.log("Adding to favorites")
-      const addResponse = await axios.put(`${ApiURL}/auth/favorites`, {
+      const addResponse = await axios.put(`${ApiURL}/data/favorites`, {
         id: currentUser.id,
         favorites: [...favorites, id.toLowerCase()]
       })
