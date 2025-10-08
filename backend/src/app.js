@@ -3,12 +3,14 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
+dotenv.config();
 import authRoutes from './routes/auth.routes.js';
 import dataRoutes from './routes/data.routes.js';
 import { notFound, errorHandler } from './middleware/error.js';
 
-dotenv.config();
 
+
+console.log("ENV:", process.env.PANIC_CRYPTO_TOKEN);
 const app = express();
 app.use(helmet());
 app.use(cors());

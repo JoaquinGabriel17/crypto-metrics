@@ -12,15 +12,21 @@ const CACHE_DURATION_MINUTES = 60;
 export const getMarketData = async (site, endpoint, params={}) => {
   if(!endpoint) return "ERROR: Debe enviar un endpoint por parámetro"
   if(!site) return "ERROR: Debe enviar un site por parámetro"
-  console.log(params)
   
   let data = []
 
   try {
+    if(site == 'favorites-dashboard') {
+      const response = await axios.get(`${API_URL}${endpoint}`, {params});
+      return response.data;
+    }
     // 1. Buscar en Mongo
     let cache = await CryptoCache.findOne({site: site});
 
     const now = Date.now();
+    
+    // Si el site es favoritos, no se utiliza cache.
+    
 
     if (cache) {
       const diffMinutes = (now - new Date(cache.lastUpdated).getTime()) / 1000 / 60;

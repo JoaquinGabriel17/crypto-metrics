@@ -1,5 +1,6 @@
 import { getMarketData} from "../services/crypto.service.js";
 import User from '../models/User.js';
+import { getNews } from "../services/cryptoPanic.service.js";
 
 
 export const fetchMarketData = async (req, res) => {
@@ -48,6 +49,16 @@ export async function updateFavorites(req, res, next) {
     }
     return res.json({ message: "Favoritos actualizados", favorites: updatedUser.favorites });
     
+  } catch (error) {
+    next(error);
+  }
+}
+
+// OBTENER NOTICIAS
+export async function fetchNews(req, res, next) {
+  try {
+    const data = await getNews();
+    res.json(data);
   } catch (error) {
     next(error);
   }

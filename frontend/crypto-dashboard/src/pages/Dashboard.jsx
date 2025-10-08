@@ -32,15 +32,14 @@ export default function Dashboard() {
 
     //Obtener favoritos
     useEffect(() => {
- 
   const fetchFavorites = async () => {
     try {
         
-      const favoritesResponse = await axios.get(`${ApiURL}/auth/favorites`, {
+      const favoritesResponse = await axios.get(`${ApiURL}/data/favorites`, {
         params: { id: currentUser.id }
       });
       setFavorites(favoritesResponse.data.favorites);
-      console.log(favorites.join(','))
+      console.log(favoritesResponse.data.favorites)
     } catch (err) {
       console.error("Error al obtener favoritos", err);
     }
@@ -107,11 +106,11 @@ export default function Dashboard() {
                  </section>
                 <section className='favorites'>
                 
-                {favorites ? 
+                {favorites && favorites.length ?
                 <HighlightSection 
                     title='Monedas favoritas'
                     endpoint={`/coins/markets`}
-                    params={{vs_currency:'usd', ids: favorites.join(',')}}
+                    params={{vs_currency:'usd', ids: favorites.slice(0,5).join(',')}} //Limitado a mostrar 5 monedas
                     site='favorites-dashboard'
                 />
                 : <p>No hay favoritos en la cuenta</p>

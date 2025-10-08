@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import DataTable from "../components/DataTable";
+import NewsCarousel from "../components/NewsCarousel";
 
 export default function LandingPage() {
 
@@ -18,11 +19,9 @@ export default function LandingPage() {
 
   return (
     <div className="landing">
-      <div className="real-time-tables">
-        
-      </div>
+      <NewsCarousel />
       <div className="crypto-data-container">
-        <h1>Precios de criptomonedas por capital de mercado</h1>
+        <h1 className="different-title">Precios de criptomonedas por capital de mercado</h1>
         <DataTable  data={coins} />
       </div>
     </div>

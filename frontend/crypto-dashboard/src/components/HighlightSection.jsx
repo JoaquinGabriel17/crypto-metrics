@@ -9,7 +9,7 @@ const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
 export default function HighlightSection({ title, endpoint, params, site }) {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+  console.log(params)
  
   useEffect(() => {
     setLoading(true)
@@ -24,7 +24,7 @@ export default function HighlightSection({ title, endpoint, params, site }) {
               ...params
             }
       });
-
+        console.log(res)
         setCoins(res.data);
         setLoading(false)
       } catch (err) {
