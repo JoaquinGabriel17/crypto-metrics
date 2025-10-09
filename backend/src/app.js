@@ -22,8 +22,8 @@ app.use(morgan('dev'));
 
 app.get('/', (_, res) => res.json({ ok: true, service: 'crypto-dashboard-backend' }));
 
-app.use('/api/auth', authRoutes);
-app.use('/api/data', dataRoutes);
+app.use('/auth', authRoutes);
+app.use('/data', dataRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
