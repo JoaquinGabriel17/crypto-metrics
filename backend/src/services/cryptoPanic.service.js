@@ -13,7 +13,6 @@ export const getNews = async () => {
 // Tiempo de cache en minutos
     const CACHE_DURATION_MINUTES = 60;
 
-  console.log("ENTRE A GET NEWS", API_TOKEN);
   let data = []
 
   try {

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import '../styles/NewsCard.css'
 import Loading from "./Loading"
+import CardDetail from "./NewsCardDetail"
 
 const ApiURL = import.meta.env.VITE_BACKEND_API_URL //guardar la URL de la API
 
@@ -14,13 +15,17 @@ export default function NewsCarosel(){
     const [visibleCount, setVisibleCount] = useState(3);
     const [loading, setLoading] = useState(false);
 
+    const [selectedNews, setSelectedNews] = useState(null);
+
     //cargar las noticias desde la API
     useEffect(() => {
         const fetchNews = async () => {
             setLoading(true)
             try {
                 const response = await axios.get(`${ApiURL}/data/news`);
-                setNews(response.data[0].results);
+                console.log(response.data)
+                if(Array.isArray(response.data) ) setNews(response.data[0].results);
+                else setNews(response.data.results)
                 setLoading(false)
             } catch (error) {
                 console.error("Error fetching news:", error);
@@ -41,8 +46,15 @@ export default function NewsCarosel(){
         <div className="news-carousel-container">
         <h1 className="different-title">Últimas noticias sobre criptomonedas</h1>
             {visibleNews.map((item, i) => (
-        <NewsCard key={i} cardInfo={item} />
+                <div key={i} onClick={() => setSelectedNews(item)}>
+                    <NewsCard key={i} cardInfo={item} />
+                </div>
+        
       ))}
+      {/* Modal detalle */}
+      {selectedNews && (
+        <CardDetail newsItem={selectedNews} onClose={() => setSelectedNews(null)} />
+      )}
 
       {loading && <Loading/>}
 
