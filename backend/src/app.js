@@ -13,7 +13,9 @@ import { notFound, errorHandler } from './middleware/error.js';
 console.log("ENV:", process.env.PANIC_CRYPTO_TOKEN);
 const app = express();
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 
