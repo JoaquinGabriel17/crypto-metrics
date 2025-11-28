@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <header className="header">
-      <h1 onClick={() => navigate('/')} className="logo">CryptoMetrics</h1>
+      <h1 onClick={() => navigate('/')} className="logo">Crypto Metrics</h1>
       {/* Menú normal */}
       
       <nav className={`nav ${isMenuOpen ? "open" : ""}`}>  
